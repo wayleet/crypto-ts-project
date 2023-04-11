@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './components/home';
-import LoginPage from './components/auth/login';
 import PrivateRoute from './utils/router/private-route';
+import AuthRootComponent from './components/auth';
 
 const App = () => {
 	return (
@@ -12,7 +12,8 @@ const App = () => {
 					<Route path='/' element={<Home />} />
 				</Route>
 				<Route path='/' element={<Home />} />
-				<Route path='login' element={<LoginPage />} />
+				<Route path='login' element={<AuthRootComponent />} />
+				<Route path='register' element={<AuthRootComponent />} />
 			</Routes>
 		</div>
 	);
