@@ -1,12 +1,20 @@
 import React, { FC } from 'react';
 import { Button, TextField, Typography } from '@mui/material';
-import { IPropsLogin } from '../../../common/types/auth';
+import { IPropsRegister } from '../../../common/types/auth';
 
-const LoginPage: FC<IPropsLogin> = ({ setPassword, setEmail, navigate }) => {
+const RegisterPage: FC<IPropsRegister> = (props) => {
+	const {
+		setEmail,
+		setRepeatPassword,
+		setPassword,
+		setFirstName,
+		setUsername,
+		navigate
+	} = props;
 	return (
 		<>
 			<Typography variant='h3' fontFamily='Golos Text' textAlign='center'>
-				Авторизация
+				Регистрация
 			</Typography>
 			<Typography
 				variant='body1'
@@ -14,8 +22,24 @@ const LoginPage: FC<IPropsLogin> = ({ setPassword, setEmail, navigate }) => {
 				fontFamily='Golos Text'
 				textAlign='center'
 			>
-				Введите ваш логин и пароль
+				Введите данные для регистрации
 			</Typography>
+			<TextField
+				fullWidth
+				margin='normal'
+				label='Имя'
+				variant='outlined'
+				placeholder='Введите ваше имя'
+				onChange={(e) => setFirstName(e.target.value)}
+			/>
+			<TextField
+				fullWidth
+				margin='normal'
+				label='Логин'
+				variant='outlined'
+				placeholder='Придумайте ваш username'
+				onChange={(e) => setUsername(e.target.value)}
+			/>
 			<TextField
 				fullWidth
 				margin='normal'
@@ -33,6 +57,15 @@ const LoginPage: FC<IPropsLogin> = ({ setPassword, setEmail, navigate }) => {
 				placeholder='Введите ваш пароль'
 				onChange={(e) => setPassword(e.target.value)}
 			/>
+			<TextField
+				type='password'
+				fullWidth
+				margin='normal'
+				label='Пароль'
+				variant='outlined'
+				placeholder='Повторите ваш пароль'
+				onChange={(e) => setRepeatPassword(e.target.value)}
+			/>
 			<Button
 				type='submit'
 				sx={{
@@ -44,24 +77,24 @@ const LoginPage: FC<IPropsLogin> = ({ setPassword, setEmail, navigate }) => {
 				}}
 				variant='contained'
 			>
-				Войти
+				Регистрация
 			</Button>
 			<Typography
 				variant='body1'
 				fontFamily='Golos Text'
 				textAlign='center'
 			>
-				У вас нет аккаунта?
+				У вас есть аккаунт?
 				<span
 					className='additionalText'
-					onClick={() => navigate('/register')}
+					onClick={() => navigate('/login')}
 					aria-hidden
 				>
-					Регистрация
+					Авторизация
 				</span>
 			</Typography>
 		</>
 	);
 };
 
-export default LoginPage;
+export default RegisterPage;
