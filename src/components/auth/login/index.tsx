@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Button, TextField, Typography } from '@mui/material';
+import { IPropsLogin } from '../../../common/types/auth';
 
-const LoginPage = () => {
+const LoginPage: FC<IPropsLogin> = ({ setPassword, setEmail, navigate }) => {
 	return (
 		<>
 			<Typography variant='h3' fontFamily='Golos Text' textAlign='center'>
@@ -21,6 +22,7 @@ const LoginPage = () => {
 				label='Почта'
 				variant='outlined'
 				placeholder='Введите вашу почту'
+				onChange={(e) => setEmail(e.target.value)}
 			/>
 			<TextField
 				type='password'
@@ -29,8 +31,10 @@ const LoginPage = () => {
 				label='Пароль'
 				variant='outlined'
 				placeholder='Введите ваш пароль'
+				onChange={(e) => setPassword(e.target.value)}
 			/>
 			<Button
+				type='submit'
 				sx={{
 					fontFamily: 'Golos Text',
 					marginTop: 2,
@@ -48,7 +52,13 @@ const LoginPage = () => {
 				textAlign='center'
 			>
 				У вас нет аккаунта?
-				<span className='registerText'>Регистрация</span>
+				<span
+					className='additionalText'
+					onClick={() => navigate('/register')}
+					aria-hidden
+				>
+					Регистрация
+				</span>
 			</Typography>
 		</>
 	);

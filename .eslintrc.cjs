@@ -25,6 +25,13 @@ module.exports = {
 		"prettier"
     ],
     "rules": {
+      'no-param-reassign': ['error', {
+        props: true,
+        ignorePropertyModificationsFor: [
+          'state',
+        ]
+      }],
+      'import/no-named-as-default': 0,
 		'react/react-in-jsx-scope': 0,
 		'react/function-component-definition': 0,
 		'react/button-has-type': 0,
@@ -41,5 +48,6 @@ module.exports = {
 		}],
 		'import/prefer-default-export': 0,
 		'@typescript-eslint/default-param-last': 0,
-    }
+    },
+
 }
