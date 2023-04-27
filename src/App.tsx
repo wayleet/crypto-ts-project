@@ -14,8 +14,8 @@ import Settings from './components/settings';
 const MyApp = () => {
 	return (
 		<div>
-			<Layout>
-				<Routes>
+			<Routes>
+				<Route element={<Layout />}>
 					<Route element={<PrivateRoute />}>
 						<Route path='/' element={<Home />} />
 						<Route path='/watchlist' element={<Watchlist />} />
@@ -25,8 +25,8 @@ const MyApp = () => {
 					<Route path='/' element={<Home />} />
 					<Route path='login' element={<AuthRootComponent />} />
 					<Route path='register' element={<AuthRootComponent />} />
-				</Routes>
-			</Layout>
+				</Route>
+			</Routes>
 		</div>
 	);
 };
