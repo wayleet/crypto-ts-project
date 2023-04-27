@@ -7,31 +7,21 @@ import {
 	NotificationsNone
 } from '@mui/icons-material';
 import { useAppSelector } from '../../hooks';
-import { getDesignTokens } from '../../utils/theme';
 import { ColorModeContext } from '../../context';
-import { useStyles } from './styles';
+import { createStyles } from './styles';
 
 const TopBar: FC = () => {
 	const { firstName } = useAppSelector((state) => state.auth.user);
 	const theme = useTheme();
-	const colors = getDesignTokens(theme.palette.mode);
+	const styles = createStyles(theme.palette.mode);
 	const colorMode = useContext(ColorModeContext);
-	const classes = useStyles();
 
 	return (
-		<Box display='flex' justifyContent='space-between' px='32px' py='24px'>
-			<Grid />
+		<Box sx={styles.root}>
+			<Grid>Welcome Alex</Grid>
 			<Box display='flex'>
-				<Grid
-					sx={{
-						pr: '37px',
-						borderRight: `1px solid ${colors.palette.primary[600]}`
-					}}
-				>
-					<IconButton
-						sx={{ mr: '45px' }}
-						onClick={colorMode.toggleColorMode}
-					>
+				<Grid sx={styles.iconBlock}>
+					<IconButton onClick={colorMode.toggleColorMode}>
 						{theme.palette.mode === 'dark' ? (
 							<DarkMode />
 						) : (
@@ -42,23 +32,11 @@ const TopBar: FC = () => {
 						<NotificationsNone />
 					</IconButton>
 				</Grid>
-				<Grid
-					sx={{
-						display: 'flex',
-						backgroundColor: `${colors.palette.primary[600]}`,
-						borderRadius: '8px',
-						ml: '28px'
-					}}
-				>
-					<IconButton
-						sx={{ '&:hover': { background: 'transparent' } }}
-					>
+				<Grid sx={styles.searchBlock}>
+					<IconButton sx={styles.searchButton}>
 						<Search />
 					</IconButton>
-					<InputBase
-						sx={{ px: '18px', py: '12px', width: '389px' }}
-						placeholder='Поиск'
-					/>
+					<InputBase sx={styles.searchInput} placeholder='Поиск' />
 				</Grid>
 			</Box>
 		</Box>

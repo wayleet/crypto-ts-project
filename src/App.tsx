@@ -7,6 +7,9 @@ import AuthRootComponent from './components/auth';
 import { getDesignTokens } from './utils/theme';
 import Layout from './components/layout';
 import { ColorModeContext } from './context';
+import Watchlist from './components/watchlist';
+import News from './components/news';
+import Settings from './components/settings';
 
 const MyApp = () => {
 	return (
@@ -15,6 +18,9 @@ const MyApp = () => {
 				<Routes>
 					<Route element={<PrivateRoute />}>
 						<Route path='/' element={<Home />} />
+						<Route path='/watchlist' element={<Watchlist />} />
+						<Route path='/news' element={<News />} />
+						<Route path='/settings' element={<Settings />} />
 					</Route>
 					<Route path='/' element={<Home />} />
 					<Route path='login' element={<AuthRootComponent />} />

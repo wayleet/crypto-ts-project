@@ -16,7 +16,14 @@ export const getDesignTokens = (mode: PaletteMode) => {
 						neutral: {
 							dark: '#0F0E0E',
 							light: '#F7F7F7'
-						}
+						},
+						black: {
+							DEFAULT: '#000000'
+						},
+						white: {
+							DEFAULT: '#FFFFFF'
+						},
+						borderColor: '#3C3C3C'
 				  }
 				: {
 						white: {
@@ -34,7 +41,11 @@ export const getDesignTokens = (mode: PaletteMode) => {
 						neutral: {
 							dark: '#000000',
 							light: '#F7F7F7'
-						}
+						},
+						black: {
+							DEFAULT: '#000000'
+						},
+						borderColor: '#D1D1D1'
 				  })
 		},
 		typography: {
