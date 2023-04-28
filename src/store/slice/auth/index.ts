@@ -20,7 +20,7 @@ const initialState: IAuthState = {
 			}
 		]
 	},
-	isLogged: true
+	isLogged: false
 };
 
 export const authSlice = createSlice({
