@@ -36,6 +36,7 @@ module.exports = {
       'react/jsx-no-useless-fragment': 0,
 		  'react/function-component-definition': 0,
 		  'react/button-has-type': 0,
+      'react/jsx-props-no-spreading': 0,
       'no-nested-ternary': 0,
 		  "jsx-a11y/label-has-associated-control": ["error", {
 			  "required": {

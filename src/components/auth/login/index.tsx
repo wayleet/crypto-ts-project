@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Button, TextField, Typography } from '@mui/material';
 import { IPropsLogin } from '../../../common/types/auth';
 
-const LoginPage: FC<IPropsLogin> = ({ setPassword, setEmail, navigate }) => {
+const LoginPage: FC<IPropsLogin> = ({ navigate, register, errors }) => {
 	return (
 		<>
 			<Typography variant='h3' fontFamily='Golos Text' textAlign='center'>
@@ -17,21 +17,30 @@ const LoginPage: FC<IPropsLogin> = ({ setPassword, setEmail, navigate }) => {
 				Введите ваш логин и пароль
 			</Typography>
 			<TextField
+				error={!!errors.email}
+				helperText={errors.email ? `${errors.email.message}` : ''}
 				fullWidth
 				margin='normal'
 				label='Почта'
 				variant='outlined'
 				placeholder='Введите вашу почту'
-				onChange={(e) => setEmail(e.target.value)}
+				{...register('email', {
+					required: 'Это обязательное поле'
+				})}
 			/>
 			<TextField
+				error={!!errors.password}
+				helperText={errors.password ? `${errors.password.message}` : ''}
 				type='password'
 				fullWidth
 				margin='normal'
 				label='Пароль'
 				variant='outlined'
 				placeholder='Введите ваш пароль'
-				onChange={(e) => setPassword(e.target.value)}
+				{...register('password', {
+					required: 'Это обязательное поле',
+					minLength: 3
+				})}
 			/>
 			<Button
 				type='submit'
