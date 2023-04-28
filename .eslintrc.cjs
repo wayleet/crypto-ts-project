@@ -38,6 +38,7 @@ module.exports = {
 		  'react/button-has-type': 0,
       'react/jsx-props-no-spreading': 0,
       'no-nested-ternary': 0,
+      'import/no-extraneous-dependencies': 0,
 		  "jsx-a11y/label-has-associated-control": ["error", {
 			  "required": {
 			  	"some": ["nesting", "id"]
@@ -51,4 +52,5 @@ module.exports = {
 		  'import/prefer-default-export': 0,
 		  '@typescript-eslint/default-param-last': 0,
      },
+
 }

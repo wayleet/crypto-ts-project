@@ -24,9 +24,7 @@ const LoginPage: FC<IPropsLogin> = ({ navigate, register, errors }) => {
 				label='Почта'
 				variant='outlined'
 				placeholder='Введите вашу почту'
-				{...register('email', {
-					required: 'Это обязательное поле'
-				})}
+				{...register('email')}
 			/>
 			<TextField
 				error={!!errors.password}
@@ -37,10 +35,7 @@ const LoginPage: FC<IPropsLogin> = ({ navigate, register, errors }) => {
 				label='Пароль'
 				variant='outlined'
 				placeholder='Введите ваш пароль'
-				{...register('password', {
-					required: 'Это обязательное поле',
-					minLength: 3
-				})}
+				{...register('password')}
 			/>
 			<Button
 				type='submit'

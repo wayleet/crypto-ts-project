@@ -3,21 +3,18 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import './style.scss';
 import { Box } from '@mui/material';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import LoginPage from './login';
 import RegisterPage from './register';
 import { instance } from '../../utils/axios';
 import { useAppDispatch } from '../../hooks';
 import { login } from '../../store/slice/auth';
-import { AppErrors } from '../../common/errors';
+import { APP_ERRORS } from '../../common/errors';
 import { FormValues } from '../../common/types/auth';
+import { LoginSchema, RegisterSchema } from '../../utils/yup';
 
 const AuthRootComponent: FC = () => {
 	const dispatch = useAppDispatch();
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const [repeatPassword, setRepeatPassword] = useState('');
-	const [firstName, setFirstName] = useState('');
-	const [username, setUsername] = useState('');
 
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -26,11 +23,14 @@ const AuthRootComponent: FC = () => {
 		register,
 		formState: { errors },
 		handleSubmit
-	} = useForm<FormValues>();
-	console.log('errors', errors);
+	} = useForm<FormValues>({
+		mode: 'all',
+		resolver: yupResolver(
+			location.pathname === '/login' ? LoginSchema : RegisterSchema
+		)
+	});
 
 	const handleSubmitForm: SubmitHandler<FormValues> = async (data) => {
-		console.log('data', data);
 		if (location.pathname === '/login') {
 			try {
 				const userData = {
@@ -41,16 +41,16 @@ const AuthRootComponent: FC = () => {
 				await dispatch(login(user.data));
 				navigate('/');
 			} catch (err) {
-				throw new Error(AppErrors.ServerNotWork);
+				throw new Error(APP_ERRORS.SERVER_NOT_WORK);
 			}
 		} else if (location.pathname === '/register') {
-			if (password === repeatPassword) {
+			if (data.password === data.confirmPassword) {
 				try {
 					const userData = {
-						firstName,
-						username,
-						email,
-						password
+						firstName: data.name,
+						username: data.username,
+						email: data.email,
+						password: data.password
 					};
 					const newUser = await instance.post(
 						'auth/register',
@@ -59,10 +59,10 @@ const AuthRootComponent: FC = () => {
 					dispatch(login(newUser.data));
 					navigate('/');
 				} catch (err) {
-					throw new Error(AppErrors.ServerNotWork);
+					throw new Error(APP_ERRORS.SERVER_NOT_WORK);
 				}
 			} else {
-				throw new Error(AppErrors.PasswordDoNotMatch);
+				throw new Error(APP_ERRORS.PASSWORD_DO_NOT_MATCH);
 			}
 		}
 	};
@@ -89,12 +89,9 @@ const AuthRootComponent: FC = () => {
 						/>
 					) : location.pathname === '/register' ? (
 						<RegisterPage
-							setEmail={setEmail}
-							setRepeatPassword={setRepeatPassword}
-							setPassword={setPassword}
-							setFirstName={setFirstName}
-							setUsername={setUsername}
 							navigate={navigate}
+							register={register}
+							errors={errors}
 						/>
 					) : null}
 				</Box>
