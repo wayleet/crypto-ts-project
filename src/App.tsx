@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { ThemeProvider, CssBaseline, createTheme } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
-import Home from './components/home';
+import Home from './pages/home';
 import PrivateRoute from './utils/router/private-route';
-import AuthRootComponent from './components/auth';
+import AuthRootComponent from './pages/auth';
 import { getDesignTokens } from './utils/theme';
 import Layout from './components/layout';
 import { ColorModeContext } from './context';
-import Watchlist from './components/watchlist';
-import News from './components/news';
-import Settings from './components/settings';
+import Watchlist from './pages/watchlist';
+import News from './pages/news';
+import Settings from './pages/settings';
 
-const MyApp = () => {
+const MyApp: FC = () => {
 	return (
 		<div>
 			<Routes>

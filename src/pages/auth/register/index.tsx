@@ -1,20 +1,18 @@
 import React, { FC } from 'react';
-import { Button, TextField, Typography } from '@mui/material';
+import { TextField, Typography } from '@mui/material';
 import { IPropsRegister } from '../../../common/types/auth';
+import AppButton from '../../../components/app-button';
+import { createStyles } from './styles';
 
 const RegisterPage: FC<IPropsRegister> = (props) => {
 	const { navigate, register, errors } = props;
+	const styles = createStyles();
 	return (
 		<>
-			<Typography variant='h3' fontFamily='Golos Text' textAlign='center'>
+			<Typography variant='h3' textAlign='center'>
 				Регистрация
 			</Typography>
-			<Typography
-				variant='body1'
-				marginBottom={1}
-				fontFamily='Golos Text'
-				textAlign='center'
-			>
+			<Typography variant='body1' marginBottom={1} textAlign='center'>
 				Введите данные для регистрации
 			</Typography>
 			<TextField
@@ -73,32 +71,22 @@ const RegisterPage: FC<IPropsRegister> = (props) => {
 				}
 				{...register('confirmPassword')}
 			/>
-			<Button
-				type='submit'
-				sx={{
-					fontFamily: 'Golos Text',
-					marginTop: 2,
-					marginBottom: 1,
-					width: '60%',
-					alignContent: 'center'
-				}}
-				variant='contained'
-			>
+			<AppButton type='submit' sx={styles.button} variant='contained'>
 				Регистрация
-			</Button>
+			</AppButton>
 			<Typography
 				variant='body1'
 				fontFamily='Golos Text'
 				textAlign='center'
 			>
 				У вас есть аккаунт?
-				<span
+				<Typography
+					sx={styles.additionalText}
 					className='additionalText'
 					onClick={() => navigate('/login')}
-					aria-hidden
 				>
 					Авторизация
-				</span>
+				</Typography>
 			</Typography>
 		</>
 	);

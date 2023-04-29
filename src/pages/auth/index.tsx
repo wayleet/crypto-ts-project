@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './style.scss';
 import { Box } from '@mui/material';
@@ -79,7 +79,7 @@ const AuthRootComponent: FC = () => {
 					margin='auto'
 					padding={5}
 					borderRadius={5}
-					boxShadow='5px 5px 10px #ccc'
+					boxShadow='-3px -2px 20px 1px #202020'
 				>
 					{location.pathname === '/login' ? (
 						<LoginPage
