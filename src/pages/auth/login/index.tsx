@@ -1,19 +1,17 @@
 import React, { FC } from 'react';
-import { Button, TextField, Typography } from '@mui/material';
+import { TextField, Typography } from '@mui/material';
 import { IPropsLogin } from '../../../common/types/auth';
+import AppButton from '../../../components/app-button';
+import { createStyles } from './styles';
 
 const LoginPage: FC<IPropsLogin> = ({ navigate, register, errors }) => {
+	const styles = createStyles();
 	return (
 		<>
-			<Typography variant='h3' fontFamily='Golos Text' textAlign='center'>
+			<Typography variant='h3' textAlign='center'>
 				Авторизация
 			</Typography>
-			<Typography
-				variant='body1'
-				marginBottom={1}
-				fontFamily='Golos Text'
-				textAlign='center'
-			>
+			<Typography variant='body1' margin='normal' textAlign='center'>
 				Введите ваш логин и пароль
 			</Typography>
 			<TextField
@@ -37,32 +35,17 @@ const LoginPage: FC<IPropsLogin> = ({ navigate, register, errors }) => {
 				placeholder='Введите ваш пароль'
 				{...register('password')}
 			/>
-			<Button
-				type='submit'
-				sx={{
-					fontFamily: 'Golos Text',
-					marginTop: 2,
-					marginBottom: 1,
-					width: '60%',
-					alignContent: 'center'
-				}}
-				variant='contained'
-			>
+			<AppButton type='submit' sx={styles.button} variant='contained'>
 				Войти
-			</Button>
-			<Typography
-				variant='body1'
-				fontFamily='Golos Text'
-				textAlign='center'
-			>
+			</AppButton>
+			<Typography variant='body1' textAlign='center'>
 				У вас нет аккаунта?
-				<span
-					className='additionalText'
+				<Typography
+					sx={styles.additionalText}
 					onClick={() => navigate('/register')}
-					aria-hidden
 				>
 					Регистрация
-				</span>
+				</Typography>
 			</Typography>
 		</>
 	);

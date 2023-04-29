@@ -2,7 +2,6 @@ import React, { FC, useEffect, useState } from 'react';
 import {
 	Box,
 	Drawer,
-	Divider,
 	IconButton,
 	List,
 	ListItem,
@@ -12,16 +11,11 @@ import {
 	Typography,
 	useTheme
 } from '@mui/material';
-import {
-	ChevronLeftOutlined,
-	ChevronRightOutlined,
-	LogoutOutlined
-} from '@mui/icons-material';
+import { ChevronLeftOutlined, LogoutOutlined } from '@mui/icons-material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ISidebarProps } from '../../common/types/sidebar';
 import FlexBetween from '../flex-between';
 import { navigateMenu } from '../../common/mocks/navigate-menu';
-import { getDesignTokens } from '../../utils/theme';
 import logo from '../../assets/images/sidebar/logo.svg';
 import { createStyles } from './styles';
 
@@ -35,11 +29,10 @@ const Sidebar: FC<ISidebarProps> = ({
 	const { pathname } = useLocation();
 	const navigate = useNavigate();
 	const theme = useTheme();
-	const colors = getDesignTokens(theme.palette.mode);
 	const styles = createStyles(theme.palette.mode);
 
 	useEffect(() => {
-		setActive(pathname.substring(1));
+		setActive(pathname);
 	}, [pathname]);
 
 	const renderNavMenu = navigateMenu.map((element) => {
@@ -47,7 +40,11 @@ const Sidebar: FC<ISidebarProps> = ({
 			<ListItem key={element.id}>
 				<ListItemButton
 					onClick={() => navigate(`${element.path}`)}
-					sx={styles.navItem}
+					sx={
+						active === element.path
+							? styles.navItemActive
+							: styles.navItem
+					}
 				>
 					<ListItemIcon>{element.icon}</ListItemIcon>
 					<ListItemText>

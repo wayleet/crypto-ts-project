@@ -30,6 +30,19 @@ export const createStyles = (mode: 'dark' | 'light') => {
 				mode === 'dark'
 					? colors.palette.white.DEFAULT
 					: colors.palette.black.DEFAULT
+		},
+		navItemActive: {
+			'&:hover': {
+				backgroundColor: '#1900D5',
+				color: '#fff',
+				borderRadius: '4px',
+				'.MuiSvgIcon-root': {
+					color: colors.palette.white.DEFAULT
+				}
+			},
+			backgroundColor: '#1900D5',
+			color: '#fff',
+			borderRadius: '4px'
 		}
 	};
 };

@@ -26,7 +26,7 @@ const TopBar: FC<ITopBarProps> = ({ setIsOpen, isOpen }) => {
 	const { firstName } = useAppSelector((state) => state.auth.user);
 	const theme = useTheme();
 	const styles = createStyles(theme.palette.mode);
-	const colorMode = useContext(ColorModeContext);
+	const { toggleColorMode } = useContext(ColorModeContext);
 
 	return (
 		<AppBar sx={styles.root}>
@@ -40,7 +40,7 @@ const TopBar: FC<ITopBarProps> = ({ setIsOpen, isOpen }) => {
 				</FlexBetween>
 				<Box display='flex'>
 					<Grid sx={styles.iconBlock}>
-						<IconButton onClick={colorMode.toggleColorMode}>
+						<IconButton onClick={toggleColorMode}>
 							{theme.palette.mode === 'dark' ? (
 								<DarkMode />
 							) : (
