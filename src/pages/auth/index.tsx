@@ -6,12 +6,11 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import LoginPage from './login';
 import RegisterPage from './register';
-import { instance } from '../../utils/axios';
 import { useAppDispatch } from '../../hooks';
-import { login } from '../../store/slice/auth';
 import { APP_ERRORS } from '../../common/errors';
 import { FormValues } from '../../common/types/auth';
 import { LoginSchema, RegisterSchema } from '../../utils/yup';
+import { loginUser, registerUser } from '../../store/thunks/auth';
 
 const AuthRootComponent: FC = () => {
 	const dispatch = useAppDispatch();
@@ -33,12 +32,7 @@ const AuthRootComponent: FC = () => {
 	const handleSubmitForm: SubmitHandler<FormValues> = async (data) => {
 		if (location.pathname === '/login') {
 			try {
-				const userData = {
-					email: data.email,
-					password: data.password
-				};
-				const user = await instance.post('auth/login', userData);
-				await dispatch(login(user.data));
+				await dispatch(loginUser(data));
 				navigate('/');
 			} catch (err) {
 				throw new Error(APP_ERRORS.SERVER_NOT_WORK);
@@ -46,17 +40,7 @@ const AuthRootComponent: FC = () => {
 		} else if (location.pathname === '/register') {
 			if (data.password === data.confirmPassword) {
 				try {
-					const userData = {
-						firstName: data.name,
-						username: data.username,
-						email: data.email,
-						password: data.password
-					};
-					const newUser = await instance.post(
-						'auth/register',
-						userData
-					);
-					dispatch(login(newUser.data));
+					await dispatch(registerUser(data));
 					navigate('/');
 				} catch (err) {
 					throw new Error(APP_ERRORS.SERVER_NOT_WORK);

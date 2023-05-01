@@ -4,5 +4,5 @@ module.exports = {
 	semi: true,
 	singleQuote: true,
 	jsxSingleQuote: true,
-	useTabs: true,
+	useTabs: true
 };

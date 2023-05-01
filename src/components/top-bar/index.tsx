@@ -16,14 +16,12 @@ import {
 	NotificationsNone,
 	MenuOutlined
 } from '@mui/icons-material';
-import { useAppSelector } from '../../hooks';
 import { ColorModeContext } from '../../context';
 import { createStyles } from './styles';
 import { ITopBarProps } from '../../common/types/top-bar';
 import FlexBetween from '../flex-between';
 
 const TopBar: FC<ITopBarProps> = ({ setIsOpen, isOpen }) => {
-	const { firstName } = useAppSelector((state) => state.auth.user);
 	const theme = useTheme();
 	const styles = createStyles(theme.palette.mode);
 	const { toggleColorMode } = useContext(ColorModeContext);
@@ -36,7 +34,9 @@ const TopBar: FC<ITopBarProps> = ({ setIsOpen, isOpen }) => {
 						sx={styles.menuIcon}
 						onClick={() => setIsOpen(!isOpen)}
 					/>
-					<Typography variant='h6'>Welcome Alex</Typography>
+					<Typography variant='h6'>
+						Welcome {sessionStorage.getItem('name')}
+					</Typography>
 				</FlexBetween>
 				<Box display='flex'>
 					<Grid sx={styles.iconBlock}>
