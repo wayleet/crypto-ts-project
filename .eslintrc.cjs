@@ -37,6 +37,12 @@ module.exports = {
 		  'react/function-component-definition': 0,
 		  'react/button-has-type': 0,
       'react/jsx-props-no-spreading': 0,
+      'prettier/prettier': [
+        'error',
+        {
+          'endOfLine': 'auto',
+        }
+      ],
       'no-nested-ternary': 0,
       'import/no-extraneous-dependencies': 0,
 		  "jsx-a11y/label-has-associated-control": ["error", {

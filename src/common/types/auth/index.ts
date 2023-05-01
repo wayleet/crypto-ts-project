@@ -21,6 +21,7 @@ export interface IPropsRegister<
 export interface IAuthState {
 	user: IPublicUser;
 	isLogged: boolean;
+	isLoading: boolean;
 }
 
 export interface IPublicUser {
@@ -40,6 +41,18 @@ interface IWatchlist {
 	createdAt: string;
 	updatedAt: string;
 	user: number | null;
+}
+
+export interface ILoginData {
+	email: string;
+	password: string;
+}
+
+export interface IRegisterData {
+	name: string;
+	username: string;
+	email: string;
+	password: string;
 }
 
 export type FormValues = {

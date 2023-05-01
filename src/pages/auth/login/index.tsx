@@ -1,11 +1,13 @@
 import React, { FC } from 'react';
 import { TextField, Typography } from '@mui/material';
 import { IPropsLogin } from '../../../common/types/auth';
-import AppButton from '../../../components/app-button';
 import { createStyles } from './styles';
+import AppLoadingButton from '../../../components/loading-button';
+import { useAppSelector } from '../../../hooks';
 
 const LoginPage: FC<IPropsLogin> = ({ navigate, register, errors }) => {
 	const styles = createStyles();
+	const loading = useAppSelector((state) => state.auth.isLoading);
 	return (
 		<>
 			<Typography variant='h3' textAlign='center'>
@@ -35,9 +37,14 @@ const LoginPage: FC<IPropsLogin> = ({ navigate, register, errors }) => {
 				placeholder='Введите ваш пароль'
 				{...register('password')}
 			/>
-			<AppButton type='submit' sx={styles.button} variant='contained'>
+			<AppLoadingButton
+				loading={loading}
+				type='submit'
+				sx={styles.button}
+				variant='contained'
+			>
 				Войти
-			</AppButton>
+			</AppLoadingButton>
 			<Typography variant='body1' textAlign='center'>
 				У вас нет аккаунта?
 				<Typography

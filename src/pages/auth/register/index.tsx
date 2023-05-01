@@ -1,12 +1,14 @@
 import React, { FC } from 'react';
 import { TextField, Typography } from '@mui/material';
 import { IPropsRegister } from '../../../common/types/auth';
-import AppButton from '../../../components/app-button';
 import { createStyles } from './styles';
+import AppLoadingButton from '../../../components/loading-button';
+import { useAppSelector } from '../../../hooks';
 
 const RegisterPage: FC<IPropsRegister> = (props) => {
 	const { navigate, register, errors } = props;
 	const styles = createStyles();
+	const loading = useAppSelector((state) => state.auth.isLoading);
 	return (
 		<>
 			<Typography variant='h3' textAlign='center'>
@@ -71,9 +73,14 @@ const RegisterPage: FC<IPropsRegister> = (props) => {
 				}
 				{...register('confirmPassword')}
 			/>
-			<AppButton type='submit' sx={styles.button} variant='contained'>
+			<AppLoadingButton
+				loading={loading}
+				type='submit'
+				sx={styles.button}
+				variant='contained'
+			>
 				Регистрация
-			</AppButton>
+			</AppLoadingButton>
 			<Typography
 				variant='body1'
 				fontFamily='Golos Text'
