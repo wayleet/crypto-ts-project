@@ -4,10 +4,12 @@ import { IPropsLogin } from '../../../common/types/auth';
 import { createStyles } from './styles';
 import AppLoadingButton from '../../../components/loading-button';
 import { useAppSelector } from '../../../hooks';
+import { useGetFavouriteAssetsQuery } from '../../../services/coingecko';
 
 const LoginPage: FC<IPropsLogin> = ({ navigate, register, errors }) => {
 	const styles = createStyles();
 	const loading = useAppSelector((state) => state.auth.isLoading);
+
 	return (
 		<>
 			<Typography variant='h3' textAlign='center'>
