@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Box, Grid, Typography, useTheme } from '@mui/material';
 import { createStyles } from './styles';
 import { useGetFavouriteAssetsQuery } from '../../services/coingecko';
+import AreaChart from '../charts/area-chart';
 
 interface FavoriteCryptocurrencyProps {
 	assetName: string;
@@ -32,7 +33,7 @@ const FavoriteCryptocurrency: FC<FavoriteCryptocurrencyProps> = ({
 					</Box>
 				</Grid>
 				<Grid item xs={12} sm={6} lg={6}>
-					<h5>Chart</h5>
+					<AreaChart chartData={data?.prices} />
 				</Grid>
 			</Grid>
 		</Grid>
