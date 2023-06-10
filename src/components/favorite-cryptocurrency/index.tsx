@@ -1,8 +1,13 @@
 import React, { FC } from 'react';
 import { Box, Grid, Typography, useTheme } from '@mui/material';
 import { createStyles } from './styles';
-import { useGetFavouriteAssetsQuery } from '../../services/coingecko';
+import {
+	useGetFavouriteAssetsQuery,
+	useGetSingleAssetQuery
+} from '../../services/coingecko';
 import AreaChart from '../charts/area-chart';
+import TrendUp from '../../assets/images/chart/trend-up.svg';
+import TrendDown from '../../assets/images/chart/trend-down.svg';
 
 interface FavoriteCryptocurrencyProps {
 	assetName: string;
@@ -13,9 +18,12 @@ const FavoriteCryptocurrency: FC<FavoriteCryptocurrencyProps> = ({
 }) => {
 	const theme = useTheme();
 	const styles = createStyles(theme.palette.mode);
-	const { data } = useGetFavouriteAssetsQuery(assetName);
-	const currentPrice = data?.prices[0];
-	const currentCap = data?.market_caps[0];
+	const { data: prices } = useGetFavouriteAssetsQuery(assetName);
+	const { data: singleAsset } = useGetSingleAssetQuery(assetName);
+	const currentPrice = singleAsset?.map((elem) => elem.current_price);
+	const changePrice = singleAsset?.map(
+		(elem) => elem.price_change_percentage_24h
+	);
 	return (
 		<Grid item xs={12} lg={6} sm={6}>
 			<Grid container sx={styles.topCardItem}>
@@ -25,15 +33,29 @@ const FavoriteCryptocurrency: FC<FavoriteCryptocurrencyProps> = ({
 					</Typography>
 					<Box sx={styles.itemDetails}>
 						<Typography variant='h3' sx={styles.cardPrice}>
-							{currentPrice && `$${currentPrice[1].toFixed(2)}`}
+							${currentPrice}
 						</Typography>
-						<Typography variant='body1' sx={styles.cardCapitalize}>
-							${currentCap && currentCap[1].toFixed(0)}
+						<Typography
+							variant='body1'
+							sx={
+								changePrice && changePrice[0] > 0
+									? [styles.priceTrend, styles.trendUp]
+									: [styles.priceTrend, styles.trendDown]
+							}
+						>
+							{changePrice && changePrice[0] > 0 ? (
+								<img src={TrendUp} alt='TrendUp' />
+							) : (
+								<img src={TrendDown} alt='TrendDown' />
+							)}
+							<span>
+								{changePrice && changePrice[0].toFixed(2)}%
+							</span>
 						</Typography>
 					</Box>
 				</Grid>
 				<Grid item xs={12} sm={6} lg={6}>
-					<AreaChart chartData={data?.prices} />
+					<AreaChart chartData={prices} />
 				</Grid>
 			</Grid>
 		</Grid>
