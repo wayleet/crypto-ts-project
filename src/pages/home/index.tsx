@@ -2,10 +2,10 @@ import React, { FC } from 'react';
 import { Grid } from '@mui/material';
 import { createStyles } from './styles';
 import FavoriteCryptocurrency from '../../components/favorite-cryptocurrency';
+import { favoriteAssets } from '../../data/assets';
 
 const Home: FC = () => {
 	const styles = createStyles();
-	const favoriteAssets: string[] = ['bitcoin', 'ethereum'];
 
 	return (
 		<Grid sx={styles.root}>
